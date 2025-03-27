@@ -19,6 +19,9 @@ import ProjectImg5 from "../assets/projects/code-tutor.png";
 import ProjectImg6 from "../assets/projects/hotel-man-sys.jpg";
 import ProjectImg7 from "../assets/projects/creative-ideas.png";
 import ProjectImg8 from "../assets/projects/crud.webp";
+
+import { useState, useEffect } from 'react';
+
 const ProjectData = [
   {
     name: "Techno's Momo Cafe",
@@ -84,7 +87,110 @@ const ProjectData4 = [
   },
 ];
 
+
+// ... (keep all your imports and ProjectData arrays)
+
 function MyBook(props) {
+  const [isMobile, setIsMobile] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10;
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
+  const handlePageClick = (e) => {
+    if (!isMobile) return;
+
+    const clickX = e.clientX;
+    const windowWidth = window.innerWidth;
+
+    if (clickX > windowWidth / 2) {
+      setCurrentPage(prev => Math.min(prev + 1, totalPages));
+    } else {
+      setCurrentPage(prev => Math.max(prev - 1, 1));
+    }
+  };
+
+  if (isMobile) {
+    return (
+      <div 
+        className="w-full h-screen overflow-y-auto bg-gray-100" // Changed overflow-hidden to overflow-y-auto
+        onClick={handlePageClick}
+      >
+        {/* Current page content */}
+        <div className="w-full min-h-screen p-4"> {/* Changed h-full to min-h-screen */}
+          {currentPage === 1 && (
+            <div className="min-h-screen"> {/* Added container with min-height */}
+              <Cover coverImg={coverImg} title="Portfolio Website" name=" Om Bhati" />
+            </div>
+          )}
+          {currentPage === 2 && (
+            <div className="min-h-screen">
+              <FirstPage />
+            </div>
+          )}
+          {currentPage === 3 && (
+            <div className="min-h-screen">
+              <Skills />
+            </div>
+          )}
+          {/* Continue with the same pattern for other pages */}
+          {currentPage === 4 && (
+            <div className="min-h-screen">
+              <Services />
+            </div>
+          )}
+          {currentPage === 5 && (
+            <div className="min-h-screen">
+              <About />
+            </div>
+          )}
+          {currentPage === 6 && (
+            <div className="min-h-screen">
+              <Projects ProjectData={ProjectData} />
+            </div>
+          )}
+          {currentPage === 7 && (
+            <div className="min-h-screen">
+              <Projects ProjectData={ProjectData2} />
+            </div>
+          )}
+          {currentPage === 8 && (
+            <div className="min-h-screen">
+              <Projects ProjectData={ProjectData3} />
+            </div>
+          )}
+          {currentPage === 9 && (
+            <div className="min-h-screen">
+              <Projects ProjectData={ProjectData4} />
+            </div>
+          )}
+          {currentPage === 10 && (
+            <div className="min-h-screen">
+              <Cover coverImg={EndImg} title="Thanks" />
+            </div>
+          )}
+        </div>
+
+        {/* Page indicator */}
+        <div className="fixed bottom-4 left-0 right-0 flex justify-center z-50">
+          <div className="bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
+            {currentPage} / {totalPages}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ... (keep your desktop view the same)
+  // Desktop view - flip book
   return (
     <HTMLFlipBook width={600} height={700} showCover="true">
       <Page number={1}>
@@ -119,6 +225,7 @@ function MyBook(props) {
       </Page>
     </HTMLFlipBook>
   );
+
 }
 
 export default MyBook;
