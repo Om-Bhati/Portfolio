@@ -26,7 +26,9 @@ const FirstPage = () => {
                 strong foundation in both development and problem-solving, I
                 strive to build efficient and scalable solutions."
               </p>
-              <HireMeModal />
+              <div onClick={(e) => e.stopPropagation()}>
+                <HireMeModal />
+              </div>
             </div>
           </div>
         </div>

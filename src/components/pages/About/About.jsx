@@ -13,12 +13,16 @@ const About = () => {
     };
 
     checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
-    return () => window.removeEventListener('resize', checkIfMobile);
+    window.addEventListener("resize", checkIfMobile);
+    return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
 
   return (
-    <div className={`page-shadow bg-white ${isMobile ? "p-6 min-h-screen" : "p-10 h-full"}`}>
+    <div
+      className={`page-shadow bg-white ${
+        isMobile ? "p-6 min-h-screen" : "p-10 h-full"
+      }`}
+    >
       {/* Heading */}
       <Heading
         title="About Me"
@@ -52,36 +56,50 @@ const About = () => {
         </p>
 
         {/* Social Links */}
-        <div className={`flex ${isMobile ? "flex-wrap justify-center gap-4" : "space-x-4"} mt-6`}>
+        <div
+          className={`flex ${
+            isMobile ? "flex-wrap justify-center gap-4" : "space-x-4"
+          } mt-6`}
+        >
           <a
             href="https://www.instagram.com/ombhati760/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:scale-110 transition-transform"
+            onClick={(e) => e.stopPropagation()} // Add this line
           >
-            <AiFillInstagram className={`social-btn ${isMobile ? "text-3xl" : ""}`} />
+            <AiFillInstagram
+              className={`social-btn ${isMobile ? "text-3xl" : ""}`}
+            />
           </a>
           <a
             href="https://github.com/Om-Bhati"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:scale-110 transition-transform"
+            onClick={(e) => e.stopPropagation()} // Add this line
           >
-            <AiFillGithub className={`social-btn ${isMobile ? "text-3xl" : ""}`} />
+            <AiFillGithub
+              className={`social-btn ${isMobile ? "text-3xl" : ""}`}
+            />
           </a>
           <a
             href="https://www.linkedin.com/in/om-bhati-a0a620259/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:scale-110 transition-transform"
+            onClick={(e) => e.stopPropagation()} // Add this line
           >
-            <AiFillLinkedin className={`social-btn ${isMobile ? "text-3xl" : ""}`} />
+            <AiFillLinkedin
+              className={`social-btn ${isMobile ? "text-3xl" : ""}`}
+            />
           </a>
           <a
             href="https://leetcode.com/u/Om_Bhati_Temp/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:scale-110 transition-transform"
+            onClick={(e) => e.stopPropagation()} // Add this line
           >
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
@@ -94,6 +112,7 @@ const About = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="hover:scale-110 transition-transform"
+            onClick={(e) => e.stopPropagation()} // Add this line
           >
             <img
               src={myImage}
@@ -104,15 +123,21 @@ const About = () => {
         </div>
 
         {/* Button Links */}
-        <div className={`flex ${isMobile ? "flex-col space-y-4 items-center" : "space-x-4"} mt-6`}>
-          <a 
-            href="https://drive.google.com/file/d/1vEX4D05ogYZOyUIasi6YGjCxE-bYEy7n/view?usp=drive_link" 
+        <div
+          className={`flex ${
+            isMobile ? "flex-col space-y-4 items-center" : "space-x-4"
+          } mt-6`}
+        >
+          <a
+            href="https://drive.google.com/file/d/1vEX4D05ogYZOyUIasi6YGjCxE-bYEy7n/view?usp=drive_link"
             className={`primary-btn ${isMobile ? "w-full text-center" : ""}`}
             download
           >
             Download Resume
           </a>
-          <Contact />
+          <div onClick={(e) => e.stopPropagation()}>
+            <Contact />
+          </div>
         </div>
       </div>
     </div>
